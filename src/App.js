@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState,useEffect } from "react";
 
 function App() {
+  const API_URL= 'https://jsonplaceholder.typicode.com/';
+  const [reqType, setReqType] = useState('Users')
+  
+  function changeToComment(){
+    setReqType('comments')
+  }
+  function changeToPost(){
+  setReqType('Posts')
+  }
+  function changeToUser(){
+    setReqType('Users')
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button onClick={changeToUser}>Users</button>
+      <button onClick={changeToPost}>Posts</button>
+      <button onClick={changeToComment}>Comments</button>
+      <h1>{reqType}</h1>
     </div>
   );
 }

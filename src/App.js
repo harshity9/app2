@@ -10,6 +10,7 @@ function App() {
   fetch(`https://jsonplaceholder.typicode.com/${reqType}`)
   .then(response => response.json())
   .then(json => setItem(json))
+  console.log(items)
   }, [reqType])
 
   
@@ -30,9 +31,12 @@ function App() {
       <button onClick={changeToPost}>Posts</button>
       <button onClick={changeToComment}>Comments</button>
       <h1>{reqType}</h1>
-      {items.map(item => {
-        return <li>{JSON.stringify(item)}</li>
-      })}
+      {items.map((item)=>{
+      return <li className="list">
+        {JSON.stringify(item)}
+      </li>
+     })}
+    
     </div>
   );
 }

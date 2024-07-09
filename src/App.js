@@ -1,11 +1,21 @@
 import { useState,useEffect } from "react";
 
 function App() {
-  const API_URL= 'https://jsonplaceholder.typicode.com/';
+
   const [reqType, setReqType] = useState('Users')
+  const [items, setItem] = useState([])
+
+  useEffect(()=>{
+
+  fetch(`https://jsonplaceholder.typicode.com/${reqType}`)
+  .then(response => response.json())
+  .then(json => setItem(json))
+  }, [reqType])
+
   
+
   function changeToComment(){
-    setReqType('comments')
+    setReqType('Comments')
   }
   function changeToPost(){
   setReqType('Posts')
@@ -20,6 +30,9 @@ function App() {
       <button onClick={changeToPost}>Posts</button>
       <button onClick={changeToComment}>Comments</button>
       <h1>{reqType}</h1>
+      {items.map(item => {
+        return <li>{JSON.stringify(item)}</li>
+      })}
     </div>
   );
 }
